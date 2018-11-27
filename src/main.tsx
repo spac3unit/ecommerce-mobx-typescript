@@ -1,24 +1,28 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { useStrict } from 'mobx';
+import { configure } from 'mobx';
+
 import { Provider } from 'mobx-react';
 import { createBrowserHistory } from 'history';
-import { TodoModel } from 'app/models';
+
+import { TodoModel, ProductModel } from 'app/models';
 import { createStores } from 'app/stores';
 import { App } from 'app';
 
+import * as mockData from 'app/mock.json';
+
 // enable MobX strict mode
-useStrict(true);
+// configure({ enforceActions: 'always' });
 
-// default fixtures for TodoStore
-const defaultTodos = [
-  new TodoModel('Use Mobx'),
-  new TodoModel('Use React', true)
-];
+//default items
+const defaultTodos = [];
+const defaultProducts = [];
+// const defaultProducts: ProductModel[] = mockData.default.sneakers.map(
+//   (product) => new ProductModel(product)
+// );
 
-// prepare MobX stores
 const history = createBrowserHistory();
-const rootStore = createStores(history, defaultTodos);
+const rootStore = createStores(history, defaultProducts);
 
 // render react DOM
 ReactDOM.render(

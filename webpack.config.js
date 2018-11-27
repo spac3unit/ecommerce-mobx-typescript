@@ -29,7 +29,7 @@ module.exports = {
     // (jsnext:main directs not usually distributable es6 format, but es6 sources)
     mainFields: ['module', 'browser', 'main'],
     alias: {
-      'app': path.resolve(__dirname, 'src/app/')
+      app: path.resolve(__dirname, 'src/app/')
     }
   },
   module: {
@@ -64,6 +64,7 @@ module.exports = {
                   require('postcss-import')({ addDependencyTo: webpack }),
                   require('postcss-url')(),
                   require('postcss-cssnext')(),
+                  require('precss')(),
                   require('postcss-reporter')(),
                   require('postcss-browser-reporter')({
                     disabled: isProduction
@@ -73,6 +74,14 @@ module.exports = {
             }
           ]
         })
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' }
+        ]
       },
       // static assets
       { test: /\.html$/, use: 'html-loader' },

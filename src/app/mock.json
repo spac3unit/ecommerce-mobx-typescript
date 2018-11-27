@@ -1,0 +1,92 @@
+{
+  "sneakers": [
+    {
+      "_id": 1,
+      "category_id": 3,
+      "category_name": "Sneakers",
+      "brand": "New Balance",
+      "name": "M998TCC",
+      "price": 80.95,
+      "imageUrl": "/assets/img/M998TCC_600x400.jpg",
+      "description": "The New Balance 247 is part of the lifestyle segment by the brand from Boston. The model takes New Balance heritage and turns it into a new modern sneaker that adds athletic style to your everyday look. With its sock-like bootie-style fit and lightweight tan brown pigskin leather upper the New Balance 274 combines comfort with performance. The REVlite cushioning technology in the white midsole as well as the gum outsole finish of this shoe that can easily be your next office sneaker.",
+      "description_list": [
+        "Made In The USA",
+        "ABZORB Sole Unit",
+        "Navy/Ocean Blue/Grey",
+        "3M Reflective Detailing ",
+        "Rubber Outsole"
+      ]
+    },
+    {
+      "_id": 2,
+      "category_id": 4,
+      "category_name": "Summer Shoes",
+      "brand": "New Balance",
+      "name": "MS247LA",
+      "price": 80.95,
+      "imageUrl": "/assets/img/MS247LA_1_1280x.jpg",
+      "description": "The New Balance 247 is part of the lifestyle segment by the brand from Boston. The model takes New Balance heritage and turns it into a new modern sneaker that adds athletic style to your everyday look. With its sock-like bootie-style fit and lightweight tan brown pigskin leather upper the New Balance 274 combines comfort with performance. The REVlite cushioning technology in the white midsole as well as the gum outsole finish of this shoe that can easily be your next office sneaker.",
+      "description_list": [
+        "Made In The USA",
+        "ABZORB Sole Unit",
+        "Navy/Ocean Blue/Grey",
+        "3M Reflective Detailing ",
+        "Rubber Outsole"
+      ]
+    },
+    {
+      "_id": 3,
+      "category_id": 4,
+      "category_name": "Summer Shoes",
+      "brand": "New Balance",
+      "name": "MSX90RCC",
+      "price": 59.4,
+      "imageUrl": "/assets/img/MSX90RCC_1_1280x.jpg",
+      "description": "New for 2018 New Balance seamlessly blend the old and new in classic NB fashion, with their latest offering. The X90 lands here in a clean and simple execution offering something for everyone. Following on from the one piece style we've already seen, these newest iterations come in a re-constructed upper with a mix of suede and mesh. These X90's feature 3M reflective  details, a REVlite sole unit and a gum outsole.",
+      "description_list": [
+        "Re-Construced Version",
+        "REVLite Sole Unit",
+        "Blue/Grey Colourway",
+        "Suede & Mesh Upper",
+        "Gum Outsole"
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "parentId": null,
+      "parentName": "",
+      "name": "ROOT",
+      "displayName": "ROOT"
+    },
+    {
+      "id": 2,
+      "parentId": 1,
+      "parentName": "ROOT",
+      "name": "Sneakers",
+      "displayName": "Sneakers"
+    },
+    {
+      "id": 3,
+      "parentId": 2,
+      "parentName": "Sneakers",
+      "name": "Running Sneakers",
+      "displayName": "Running Sneakers"
+    },
+    {
+      "id": 4,
+      "parentId": 2,
+      "parentName": "Sneakers",
+      "name": "Casual Sneakers",
+      "displayName": "Casual Sneakers"
+    },
+    {
+      "id": 5,
+      "parentId": 2,
+      "parentName": "Sneakers",
+      "name": "Leather Sneakers",
+      "displayName": "Leather Sneakers"
+    }
+  ]
+}

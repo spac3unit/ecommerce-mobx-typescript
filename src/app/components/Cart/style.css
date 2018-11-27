@@ -1,0 +1,13 @@
+.buttonSecondary {
+  background: rgb(66, 184, 221); /* this is a light blue */
+}
+.buttonSMALL {
+  font-size: 85%;
+}
+.buttonXSMALL {
+  font-size: 70%;
+}
+.buttonCardAction {
+  padding: 0.4em 0.6em;
+  background: #777777;
+}

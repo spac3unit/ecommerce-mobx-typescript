@@ -1,0 +1,15 @@
+.product {
+  /* letter-spacing: normal; */
+  h6 {
+    margin: 0.7em 0;
+  }
+}
+.product-price {
+  display: flex;
+  margin: 0.85em 0;
+  padding-right: 0.85em;
+}
+.buttonCardAction {
+  padding: 0.4em 0.6em;
+  background: rgb(255, 235, 59);
+}
