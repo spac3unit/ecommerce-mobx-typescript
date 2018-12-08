@@ -30,7 +30,7 @@ const App = hot(module)(({ history }) => (
             }
           />
           <Route path="/home" component={Main} />
-          <Route path="/products/:id" component={ProductDetails} />
+          <Route path="/catalog/product/:id" component={ProductDetails} />
           <Route path="/catalog" component={CatalogV2} />
           <Route path="/login" component={LoginComponent} />
         </Switch>

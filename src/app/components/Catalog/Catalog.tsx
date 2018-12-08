@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { observable, action, toJS } from 'mobx';
 import { observer } from 'mobx-react';
-import CategoriesApi from 'app/utils/api/categories';
+import Client from 'app/utils/api/client';
 import { getProductsList, getProductById } from 'app/utils/api';
 import { ProductModel, CartItemModel } from 'app/models';
-import ProductCategories from '../../utils/api/categories';
 
 export class RestClient {
   baseUrl?: string;
@@ -26,35 +25,37 @@ export class RestClient {
 
 @observer
 export default class Catalog extends React.Component<any, any> {
-  @observable categoies;
-  @observable brands;
-  @observable products;
   @observable categories;
-  @observable client;
+  @observable products;
   @observable filter;
+  @observable selectedCategory;
+  @observable itemsInSelectedCategory;
+  api;
+
   constructor(props) {
     super(props);
-    this.brands = [];
-    this.categoies = [];
-    this.client = new CategoriesApi();
+    this.api = new Client({});
     this.filter = '';
     this.products = [];
     this.categories = [];
+    this.selectedCategory = [];
+    this.itemsInSelectedCategory = [];
   }
 
   componentWillMount() {
-    // this.productCategories = this.client.list('name=Sneakers');
-    this.client.list('name=Sneakers').then((p) => (this.categories = p[0]));
-    this.client
-      .list('name=Sneakers')
-      .then((p) => (this.products = p[0].products_in_category));
+    this.api.products.list().then((p) => (this.products = p));
+    this.api.categories.list('?name=Sneakers').then((c) => {
+      this.itemsInSelectedCategory = c[0].products_in_category;
+    });
   }
 
   public render() {
-    return this.products.length <= 0 ? (
+    return this.itemsInSelectedCategory.length <= 0 ? (
       <div>Loading...</div>
     ) : (
-      this.products.map((p, idx) => <div>{p.name}</div>)
+      this.itemsInSelectedCategory.map((p, idx) => (
+        <div key={p.id}>{p.name}</div>
+      ))
     );
   }
 }
@@ -75,7 +76,6 @@ interface IProps {
 
 class CatalogComponent extends React.Component<IProps, any> {
   public render() {
-    console.log(this.props);
     return (
       <div>
         <p>All brands</p>
@@ -84,20 +84,3 @@ class CatalogComponent extends React.Component<IProps, any> {
     );
   }
 }
-
-// function Api() {
-//   return {
-//     productCategories: {
-//       list: function() {
-//         fetch('http://localhost:1337/categories').then((d) =>
-//           console.log(d.json())
-//         );
-//       },
-//       retrieve: function(id) {
-//         fetch(`http://localhost:1337/categories/${id}`).then((d) =>
-//           console.log(d.json())
-//         );
-//       }
-//     }
-//   };
-// }

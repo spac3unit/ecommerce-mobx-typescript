@@ -26,8 +26,8 @@ export default class Navigation extends React.Component {
   };
   render() {
     const { pathname } = this.props[STORE_ROUTER].location;
-    const activeItem = pathname.replace(/^\/+/g, ''); // removes slash from /pathname
-    console.log(activeItem);
+    // const activeItem = pathname.replace(/^\/+/g, ''); // removes slash from /pathname
+    const activeItem = pathname.split('/')[1];
     return (
       <Menu secondary>
         <Menu.Item

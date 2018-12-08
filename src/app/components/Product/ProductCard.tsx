@@ -18,10 +18,10 @@ const ProductCard: React.SFC<ProductCardProps> = (props) => {
   };
   const handleClick = (e) => {
     e.preventDefault();
-    props[STORE_ROUTER].history.push(`/products/${id}`);
+    props[STORE_ROUTER].history.push(`/catalog/product/${id}`);
   };
   return (
-    <Card href={`/products/${id}`} onClick={handleClick}>
+    <Card href={`/catalog/product/${id}`} onClick={handleClick} as="div">
       <Image src={imageUrl} />
       <Card.Content>
         <Card.Meta>{brand.name}</Card.Meta>

@@ -18,31 +18,29 @@ export default class SidebarExample extends React.Component<any, any> {
     const cartVisibility = this.props[STORE_UI].showCart;
 
     return (
-      <div>
-        <Sidebar
-          as={Menu}
-          animation="overlay"
-          direction="right"
-          icon="labeled"
-          inverted
-          vertical
-          visible={cartVisibility}
-          width="thin"
-        >
-          <Menu.Item as="a">
-            <Icon name="home" />
-            Home
-          </Menu.Item>
-          <Menu.Item as="a">
-            <Icon name="gamepad" />
-            Games
-          </Menu.Item>
-          <Menu.Item as="a">
-            <Icon name="camera" />
-            Channels
-          </Menu.Item>
-        </Sidebar>
-      </div>
+      <Sidebar
+        as={Menu}
+        animation="overlay"
+        direction="right"
+        icon="labeled"
+        inverted
+        vertical
+        visible={cartVisibility}
+        width="thin"
+      >
+        <Menu.Item as="a">
+          <Icon name="home" />
+          Home
+        </Menu.Item>
+        <Menu.Item as="a">
+          <Icon name="gamepad" />
+          Games
+        </Menu.Item>
+        <Menu.Item as="a">
+          <Icon name="camera" />
+          Channels
+        </Menu.Item>
+      </Sidebar>
     );
   }
 }
