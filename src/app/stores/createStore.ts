@@ -3,7 +3,13 @@ import { ProductModel } from 'app/models';
 import { CatalogStore } from './CatalogStore';
 import { RouterStore } from './RouterStore';
 import { CartStore } from './CartStore';
-import { STORE_ROUTER, STORE_CATALOG, STORE_CART } from 'app/constants';
+import { UIStore } from './UIStore';
+import {
+  STORE_ROUTER,
+  STORE_CATALOG,
+  STORE_CART,
+  STORE_UI
+} from 'app/constants';
 
 export function createStores(
   history: History,
@@ -12,9 +18,11 @@ export function createStores(
   const routerStore = new RouterStore(history);
   const catalogStore = new CatalogStore();
   const cartStore = new CartStore();
+  const uiStore = new UIStore(this);
   return {
     [STORE_ROUTER]: routerStore,
     [STORE_CATALOG]: catalogStore,
-    [STORE_CART]: cartStore
+    [STORE_CART]: cartStore,
+    [STORE_UI]: uiStore
   };
 }

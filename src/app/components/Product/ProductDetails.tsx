@@ -1,34 +1,35 @@
 import * as React from 'react';
-// import { RouterStore, CatalogStore, CartStore } from 'app/stores';
-// import { ProductModel, CartItemModel } from 'app/models';
+import { ProductModel, CartItemModel } from 'app/models';
 import { toJS } from 'mobx';
 import { inject, observer } from 'mobx-react';
-import { STORE_ROUTER, STORE_CATALOG, STORE_CART } from 'app/constants';
+import { STORE_CATALOG, STORE_CART } from 'app/constants';
+import { Loader } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
+
 export interface IProps {
   router?: any;
   catalog?: any;
   match?: any;
 }
 
-export interface IState {
-  selectedProduct: any;
-}
-@inject(STORE_ROUTER, STORE_CATALOG, STORE_CART)
+@withRouter
+@inject(STORE_CATALOG, STORE_CART)
 @observer
-export default class ProductDetails extends React.Component<IProps, IState> {
+export default class ProductDetails extends React.Component<IProps, any> {
   componentWillMount() {
-    const { router, catalog } = this.props;
+    const { match, catalog } = this.props;
+    catalog.productById(match.params.id);
   }
+
   public render() {
-    let item = this.props.catalog.selectedProduct;
-    if (!item) {
-      return <Loading />;
+    const { selectedProduct } = this.props.catalog;
+    if (!selectedProduct) {
+      return <Loader active inline="centered" />;
     }
-    return <ProductDetailsView item={item} />;
+    return <ProductDetailsView item={selectedProduct} />;
   }
 }
 
-const Loading = () => <div>Loading...</div>;
 const ProductDetailsView = ({
   item: { imageUrl, category_rel, brand, name, price, description }
 }) => {

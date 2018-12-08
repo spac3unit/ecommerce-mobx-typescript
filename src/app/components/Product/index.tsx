@@ -5,6 +5,9 @@ import { observable } from 'mobx';
 import { STORE_ROUTER, STORE_CATALOG, STORE_CART } from 'app/constants';
 import * as styles from './style.css';
 import { RouterStore, CatalogStore, CartStore } from 'app/stores';
+import { Grid, Image, Container } from 'semantic-ui-react';
+
+import ProductCard from 'app/components/Product/ProductCard';
 
 export interface ProductListProps {
   catalog?: CatalogStore;
@@ -21,13 +24,16 @@ export class ProductList extends React.Component<ProductListProps, any> {
     const { catalog } = this.props;
 
     return (
-      <div className="pure-g">
-        {catalog.list.map((product) => (
-          <div className="pure-u-1-4" key={product.id}>
-            <ProductView product={product} />
-          </div>
-        ))}
-      </div>
+      <Container fluid>
+        <Grid doubling columns={4}>
+          {catalog.list.map((product) => (
+            <Grid.Column key={product.id}>
+              <ProductCard product={product} />
+              {/* <ProductView product={product} /> */}
+            </Grid.Column>
+          ))}
+        </Grid>
+      </Container>
     );
   }
 }
@@ -58,7 +64,7 @@ class ProductView extends React.Component<ProductViewProps, any> {
       <div>
         <div className="product-picture">
           <a onClick={(e) => this.handleDetailsView(e, this.props.product)}>
-            <img src={imageUrl} alt="" className="pure-img " />
+            <Image src={imageUrl} />
           </a>
         </div>
         <div className="product-headline">
