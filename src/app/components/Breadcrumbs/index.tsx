@@ -9,7 +9,7 @@ export default class Breadcrumbs extends React.Component<
   public render() {
     return (
       <div>
-        <p>PageName / Category / Subcategory / Product Name</p>
+        {/* <p>PageName / Category / Subcategory / Product Name</p> */}
         <p>Home / Shoes / Running / New Balance / M390s</p>
       </div>
     );

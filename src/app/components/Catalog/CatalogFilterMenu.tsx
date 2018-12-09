@@ -25,8 +25,7 @@ export default class CatalogFilterMenu extends React.Component<IProps, IState> {
   };
   render() {
     const { activeItem } = this.state;
-    const { categoriesList, brandsList } = this.props[STORE_CATALOG];
-    this.props[STORE_CATALOG].getProductCategoriesList();
+    const { categories, brands } = this.props[STORE_CATALOG];
 
     return (
       <Menu vertical>
@@ -34,7 +33,7 @@ export default class CatalogFilterMenu extends React.Component<IProps, IState> {
           <Menu.Header>Categories</Menu.Header>
 
           <Menu.Menu>
-            {categoriesList.map((c) => (
+            {categories.map((c) => (
               <Menu.Item
                 name={c.name}
                 key={c._id}
@@ -47,27 +46,18 @@ export default class CatalogFilterMenu extends React.Component<IProps, IState> {
         </Menu.Item>
         <Menu.Item>
           <Menu.Header>Brands</Menu.Header>
-          {brandsList.length > 0 &&
-            brandsList.map((c) => (
-              <Menu.Item
-                name={c.name}
-                key={c._id}
-                id={c._id}
-                active={activeItem === c.name}
-                onClick={this.handleBrandClick}
-              />
-            ))}
+
           <Menu.Menu>
-            <Menu.Item
-              name="new balance"
-              active={activeItem === 'new balance'}
-              onClick={this.handleItemClick}
-            />
-            <Menu.Item
-              name="adidas"
-              active={activeItem === 'adidas'}
-              onClick={this.handleItemClick}
-            />
+            {brands.length > 0 &&
+              brands.map((c) => (
+                <Menu.Item
+                  name={c.name}
+                  key={c._id}
+                  id={c._id}
+                  active={activeItem === c.name}
+                  onClick={this.handleBrandClick}
+                />
+              ))}
           </Menu.Menu>
         </Menu.Item>
 

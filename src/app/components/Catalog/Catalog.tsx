@@ -1,22 +1,32 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
 import { STORE_ROUTER, STORE_CATALOG, STORE_CART } from 'app/constants';
-
+import { Grid, Image, Loader } from 'semantic-ui-react';
+import Breadcrumbs from 'app/components/Breadcrumbs';
+import CatalogFilterMenu from 'app/components/Catalog/CatalogFilterMenu';
+import CatalogSorter from 'app/components/Catalog/CatalogSorter';
 @inject(STORE_CATALOG)
 @observer
 export default class Catalog extends React.Component<any, any> {
   componentWillMount() {
     this.props[STORE_CATALOG].getProductsList();
     this.props[STORE_CATALOG].getProductsOfCategory('?name=Sneakers');
+    this.props[STORE_CATALOG].getCategoriesList();
+    this.props[STORE_CATALOG].getBrandsList();
   }
 
   public render() {
+    const { categories, products, productsInCategory, loading } = this.props[
+      STORE_CATALOG
+    ];
+
     return (
       <div>
         <CatalogComponent
-          categories={this.props[STORE_CATALOG].categories}
-          products={this.props[STORE_CATALOG].products}
-          productsInCategory={this.props[STORE_CATALOG].productsInCategory}
+          categories={categories}
+          products={products}
+          productsInCategory={productsInCategory}
+          loading={loading}
         />
       </div>
     );
@@ -25,20 +35,33 @@ export default class Catalog extends React.Component<any, any> {
 
 class CatalogComponent extends React.Component<any, any> {
   render() {
-    const { categories, products, productsInCategory } = this.props;
-    const loaded = productsInCategory.length > 0 ? true : false;
-    console.log(this.props);
+    const { categories, products, productsInCategory, loading } = this.props;
 
-    return !loaded ? (
-      <div>Loading...</div>
+    return loading ? (
+      <Loader />
     ) : (
-      productsInCategory.map((p) => (
-        <p>
-          <div>{p.name}</div>
-          <div>{p.price}</div>
-          <div>{p.brand}</div>
-        </p>
-      ))
+      <div>
+        <Breadcrumbs />
+        <Grid>
+          <Grid.Column width={4}>
+            <CatalogFilterMenu />
+          </Grid.Column>
+          <Grid.Column width={8}>
+            <CatalogSorter />
+            <ProductsList items={productsInCategory} />
+          </Grid.Column>
+        </Grid>
+      </div>
     );
   }
 }
+
+const ProductsList = ({ items }) => {
+  return items.map((p) => (
+    <p>
+      <div>{p.name}</div>
+      <div>{p.price}</div>
+      <div>{p.brand}</div>
+    </p>
+  ));
+};

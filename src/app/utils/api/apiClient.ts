@@ -18,8 +18,9 @@ export default class ApiClient {
       .then((json) => ({ status: response.status, json: json }))
       .catch(() => ({ status: response.status, json: null }));
   };
-  getConfig(method, data) {
+  getConfig = (method, data) => {
     let config = {
+      body: null,
       credentials: 'same-origin',
       method: method,
       headers: {
@@ -33,35 +34,46 @@ export default class ApiClient {
       config.body = JSON.stringify(data);
     }
     return config;
-  }
-  get(endpoint, filter = '') {
+  };
+  get = (endpoint, filter = '') => {
     return fetch(this.baseUrl + endpoint + filter)
       .then((response) => response.json())
       .then((data) => data);
-  }
-  //   get(endpoint, filter) {
-  //     return fetch(`${this.baseUrl}${endpoint}?${filter}`)
-  //       .then((response) => response.json())
-  //       .then((data) => data);
-  //   }
+  };
 
-  post(endpoint, data) {
-    console.log('post data');
-    console.log(data);
+  post = (endpoint, data) => {
     return fetch(this.baseUrl + endpoint, this.getConfig('post', data))
       .then((response) => response.json())
       .then((data) => data);
-  }
+  };
 
-  put(endpoint, data) {
+  put = (endpoint, data) => {
     return fetch(this.baseUrl + endpoint, this.getConfig('put', data)).then(
       ApiClient.returnStatusAndJson
     );
-  }
+  };
 
-  delete(endpoint) {
+  delete = (endpoint) => {
     return fetch(this.baseUrl + endpoint, this.getConfig('delete')).then(
       ApiClient.returnStatusAndJson
     );
-  }
+  };
+
+  postFormData = (endpoint) => {
+    // var input = document.querySelector('input[type="file"]');
+    let input;
+    let formData = new FormData();
+    for (const file of input.files) {
+      formData.append('files', file, file.name);
+    }
+    return fetch(this.baseUrl + endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Accept: 'application/json',
+        Authorization: 'AUTH TOKEN'
+      },
+      body: formData
+    });
+  };
 }

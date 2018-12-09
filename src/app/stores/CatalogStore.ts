@@ -5,13 +5,14 @@ import Client from 'app/utils/api/client';
 import { ProductModel, CartItemModel } from 'app/models';
 
 export class CatalogStore {
+  api: any;
   @observable loading: boolean = false;
-  @observable categories;
+  @observable categories: [] = [];
+  @observable brands: [] = [];
   @observable products: ProductModel[] = [];
   @observable selectedProduct: {} | null = null;
   @observable productsInCategory: ProductModel[] = [];
 
-  api;
   constructor() {
     this.api = new Client({});
   }
@@ -44,7 +45,13 @@ export class CatalogStore {
       this.loading = false;
     });
   };
-
+  @action getBrandsList = (filter) => {
+    this.loading = true;
+    this.api.brands.list(filter).then((data) => {
+      this.brands = toJS(data);
+      this.loading = false;
+    });
+  };
   @action findProductById = (id) => {
     this.selectedProduct = this.products.find((item) => item.id === id);
   };

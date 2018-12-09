@@ -2,7 +2,9 @@
 import CategoriesApi from 'app/utils/api/categories';
 // import ProductsApi0 from 'app/utils/api/products0';
 import ProductsApi from 'app/utils/api/products';
+import BrandsApi from 'app/utils/api/brands';
 import ApiClient from 'app/utils/api/apiClient';
+
 // import { ApiClient } from 'app/utils/api/client';
 interface IProps {
   baseUrl: string;
@@ -16,6 +18,7 @@ class Client {
   apiTest;
   products;
   categories;
+  brands;
   constructor(options) {
     if (!options) {
       options = {};
@@ -25,6 +28,7 @@ class Client {
     const apiClientTest = new ApiClient({ baseUrl: this.apiBaseUrl });
     this.products = new ProductsApi(apiClientTest);
     this.categories = new CategoriesApi(apiClientTest);
+    this.brands = new BrandsApi(apiClientTest);
   }
 }
 export default Client;

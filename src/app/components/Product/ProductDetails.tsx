@@ -1,51 +1,35 @@
 import * as React from 'react';
-import { ProductModel, CartItemModel } from 'app/models';
-import { toJS } from 'mobx';
 import { inject, observer } from 'mobx-react';
-import { STORE_CATALOG, STORE_CART } from 'app/constants';
+import { STORE_CATALOG, STORE_ROUTER, STORE_CART } from 'app/constants';
 import { Loader } from 'semantic-ui-react';
-import { withRouter } from 'react-router-dom';
 
-export interface IProps {
-  router?: any;
-  catalog?: any;
-  match?: any;
-}
-
-@withRouter
-@inject(STORE_CATALOG, STORE_CART)
+@inject(STORE_CATALOG, STORE_ROUTER)
 @observer
-export default class ProductDetails extends React.Component<IProps, any> {
+export default class ProductDetails extends React.Component<any, any> {
   componentWillMount() {
-    const { match, catalog } = this.props;
-    const { products, selectedProduct } = this.props[STORE_CATALOG];
+    const { id } = this.props.match.params;
+    const { getProduct, findProductById, products } = this.props[STORE_CATALOG];
+
     if (products.length <= 0) {
-      this.props[STORE_CATALOG].getProduct(match.params.id);
+      getProduct(id);
     } else {
-      this.props[STORE_CATALOG].findProductById(match.params.id);
+      findProductById(id);
     }
   }
 
-  public render() {
-    const { selectedProduct } = this.props.catalog;
-    if (!selectedProduct) {
-      return <Loader active inline="centered" />;
-    }
-    return <ProductDetailsView item={selectedProduct} />;
+  render() {
+    const { selectedProduct } = this.props[STORE_CATALOG];
+    return !selectedProduct ? (
+      <Loader />
+    ) : (
+      <div>
+        <img src={selectedProduct.imageUrl} width="400" alt="" />
+        <p>{selectedProduct.category_rel.name}</p>
+        <p>{selectedProduct.brand.name}</p>
+        <p>{selectedProduct.name}</p>
+        <p>{selectedProduct.price}</p>
+        <p>{selectedProduct.description}</p>
+      </div>
+    );
   }
 }
-
-const ProductDetailsView = ({
-  item: { imageUrl, category_rel, brand, name, price, description }
-}) => {
-  return (
-    <div>
-      <img src={imageUrl} width="400" alt="" />
-      <p>{category_rel.name}</p>
-      <p>{brand.name}</p>
-      <p>{name}</p>
-      <p>{price}</p>
-      <p>{description}</p>
-    </div>
-  );
-};

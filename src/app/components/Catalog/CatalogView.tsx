@@ -2,8 +2,6 @@ import * as React from 'react';
 import { inject, observer } from 'mobx-react';
 import { observable, action, toJS } from 'mobx';
 
-import { RouteComponentProps } from 'react-router';
-
 import { Grid, Image } from 'semantic-ui-react';
 import { STORE_CATALOG, STORE_ROUTER } from 'app/constants';
 import { Counter } from 'app/components/Counter';
@@ -11,7 +9,6 @@ import CatalogFilterMenu from 'app/components/Catalog/CatalogFilterMenu';
 import CatalogSorter from 'app/components/Catalog/CatalogSorter';
 import Breadcrumbs from 'app/components/Breadcrumbs';
 import Category from '../../models/category.model';
-export interface CatalogProps {}
 @inject(STORE_CATALOG, STORE_ROUTER)
 @observer
 export class Catalog extends React.Component<any, any> {
@@ -26,8 +23,6 @@ export class Catalog extends React.Component<any, any> {
     this.props[STORE_CATALOG].getProductCategoriesList();
   };
   returnStatusAndJson = (response) =>
-    // response.json().then((json) => ({ json }));
-    // response.json().then((json) => ({ status: response.status }));
     response.json().then((json) => ({
       json
     }));
