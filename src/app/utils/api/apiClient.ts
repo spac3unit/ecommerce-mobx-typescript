@@ -45,23 +45,23 @@ export default class ApiClient {
   //       .then((data) => data);
   //   }
 
-  //   post(endpoint, data) {
-  //     console.log('post data');
-  //     console.log(data);
-  //     return fetch(this.baseUrl + endpoint, this.getConfig('post', data))
-  //       .then((response) => response.json())
-  //       .then((data) => data);
-  //   }
+  post(endpoint, data) {
+    console.log('post data');
+    console.log(data);
+    return fetch(this.baseUrl + endpoint, this.getConfig('post', data))
+      .then((response) => response.json())
+      .then((data) => data);
+  }
 
-  //   put(endpoint, data) {
-  //     return fetch(this.baseUrl + endpoint, this.getConfig('put', data)).then(
-  //       ApiClient.returnStatusAndJson
-  //     );
-  //   }
+  put(endpoint, data) {
+    return fetch(this.baseUrl + endpoint, this.getConfig('put', data)).then(
+      ApiClient.returnStatusAndJson
+    );
+  }
 
-  //   delete(endpoint) {
-  //     return fetch(this.baseUrl + endpoint, this.getConfig('delete')).then(
-  //       ApiClient.returnStatusAndJson
-  //     );
-  //   }
+  delete(endpoint) {
+    return fetch(this.baseUrl + endpoint, this.getConfig('delete')).then(
+      ApiClient.returnStatusAndJson
+    );
+  }
 }

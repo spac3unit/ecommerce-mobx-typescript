@@ -18,7 +18,12 @@ export interface IProps {
 export default class ProductDetails extends React.Component<IProps, any> {
   componentWillMount() {
     const { match, catalog } = this.props;
-    catalog.productById(match.params.id);
+    const { products, selectedProduct } = this.props[STORE_CATALOG];
+    if (products.length <= 0) {
+      this.props[STORE_CATALOG].getProduct(match.params.id);
+    } else {
+      this.props[STORE_CATALOG].findProductById(match.params.id);
+    }
   }
 
   public render() {

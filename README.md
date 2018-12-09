@@ -1,6 +1,6 @@
 # Ecommerce Shop
 
-- Front-end: React && Mobx && Typescript
+- Front-end: React, Mobx, Typescript
 - Back-end: [Strapi](https://github.com/strapi/strapi)
 
 ## Actions

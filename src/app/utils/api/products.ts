@@ -6,4 +6,7 @@ export default class ProductsApi {
   list(filter) {
     return this.client.get('/products', filter);
   }
+  item(id) {
+    return this.client.get(`/products/${id}`);
+  }
 }
